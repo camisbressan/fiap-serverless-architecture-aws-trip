@@ -45,7 +45,7 @@ Resources:
        CreateTripRecord:
          Type: Api
          Properties:
-           Path: /trip/country/{country}/findByCidade
+           Path: /trip/country/{country}/findByCity
            Method: get
            RequestParameters:
             - method.request.querystring.city
@@ -63,7 +63,7 @@ Resources:
        CreateTripRecord:
          Type: Api
          Properties:
-           Path: /trip/country/{country}
+           Path: /trip/{country}
            Method: get
            RequestParameters:
             - method.request.path.country 
@@ -86,8 +86,8 @@ Resources:
            RequestParameters:
             - method.request.querystring.starts
             - method.request.querystring.ends
-                      
-  StudyTable:
+             
+  TripTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: trip
@@ -106,24 +106,16 @@ Resources:
         - AttributeName: date
           KeyType: RANGE
       LocalSecondaryIndexes: 
-        - IndexName: tagIndex
+        - IndexName: cityIndex
           KeySchema: 
             - AttributeName: country
               KeyType: HASH
             - AttributeName: city
               KeyType: RANGE
           Projection:
-             ProjectionType: ALL 
-        - IndexName: consumedIndex
-          KeySchema: 
-            - AttributeName: country
-              KeyType: HASH
-            - AttributeName: reason
-              KeyType: RANGE
-          Projection:
-             ProjectionType: ALL      
-      BillingMode: PAY_PER_REQUEST             
-
+             ProjectionType: ALL    
+      BillingMode: PAY_PER_REQUEST
+      
 Outputs:
 
     CreateTripRecordFunction:

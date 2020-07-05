@@ -52,10 +52,9 @@ Resources:
       Events:
         GetTripsByCity:
           Properties:
-           Path: /trip/{country}/{city}
+           Path: /trip/{country}/findByCity
            Method: get
            RequestParameters:
-            - method.request.querystring.country
             - method.request.querystring.city
           Type: Api
       Handler: br.com.iwe.handler.GetTripsByCity::handleRequest
@@ -67,10 +66,10 @@ Resources:
       Events:
         GetTripsByCountry:
           Properties:
-           Path: /trip/country/{country}
+           Path: /trip/{country}
            Method: get
            RequestParameters:
-            - method.request.querystring.country
+            - method.request.path.country
           Type: Api
       Handler: br.com.iwe.handler.GetTripsByCountry::handleRequest
       Runtime: java8
