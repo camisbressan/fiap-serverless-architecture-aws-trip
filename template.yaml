@@ -47,8 +47,6 @@ Resources:
          Properties:
            Path: /trips/{country}
            Method: get
-           RequestParameters:
-            - method.request.path.country
                        
   GetTripsByCityFunction:
     Type: AWS::Serverless::Function
@@ -63,7 +61,7 @@ Resources:
        GetTripsByCity:
          Type: Api
          Properties:
-           Path: /trips/{country}/city
+           Path: /trips/{country}/
            Method: get
            RequestParameters:
             - method.request.querystring.city 
