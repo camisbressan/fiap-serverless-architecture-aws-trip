@@ -28,7 +28,7 @@ public class TripRepository {
 		final DynamoDBQueryExpression<Trip> queryExpression = new DynamoDBQueryExpression<Trip>()
 				.withKeyConditionExpression("dateTrip between :val1 and :val2")
 				.withExpressionAttributeValues(eav);
-
+		
 		final List<Trip> trips = mapper.query(Trip.class, queryExpression);
 
 		return trips;
@@ -43,7 +43,7 @@ public class TripRepository {
 		final DynamoDBQueryExpression<Trip> queryExpression = new DynamoDBQueryExpression<Trip>()
 				.withIndexName("cityIndex").withConsistentRead(false)
 				.withKeyConditionExpression("country = :val1 and city=:val2").withExpressionAttributeValues(eav);
-
+		
 		final List<Trip> trips = mapper.query(Trip.class, queryExpression);
 
 		return trips;
@@ -56,7 +56,7 @@ public class TripRepository {
 
 		final DynamoDBQueryExpression<Trip> queryExpression = new DynamoDBQueryExpression<Trip>()
 				.withKeyConditionExpression("country = :val1").withExpressionAttributeValues(eav);
-
+		
 		final List<Trip> trips = mapper.query(Trip.class, queryExpression);
 
 		return trips;

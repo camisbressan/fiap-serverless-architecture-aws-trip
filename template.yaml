@@ -30,25 +30,7 @@ Resources:
          Type: Api
          Properties:
            Path: /trip
-           Method: post
-           
-  GetTripsByCityFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-     CodeUri: target/fiap-serverless-architecture-aws-trip-1.0.0-SNAPSHOT-jar-with-dependencies.jar
-     Handler: br.com.iwe.handler.GetTripsByCity::handleRequest
-     Runtime: java8
-     Policies:
-       - DynamoDBCrudPolicy:
-           TableName: !Ref TripTable     
-     Events:
-       CreateTripRecord:
-         Type: Api
-         Properties:
-           Path: /trips/{country}/
-           Method: get
-           RequestParameters:
-            - method.request.querystring.city
+           Method: post         
             
   GetTripsByCountryFunction:
     Type: AWS::Serverless::Function
@@ -60,13 +42,31 @@ Resources:
        - DynamoDBCrudPolicy:
            TableName: !Ref TripTable     
      Events:
-       CreateTripRecord:
+       GetTripsByCountry:
          Type: Api
          Properties:
            Path: /trips/{country}
            Method: get
            RequestParameters:
-            - method.request.path.country 
+            - method.request.path.country
+                       
+  GetTripsByCityFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+     CodeUri: target/fiap-serverless-architecture-aws-trip-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.iwe.handler.GetTripsByCity::handleRequest
+     Runtime: java8
+     Policies:
+       - DynamoDBCrudPolicy:
+           TableName: !Ref TripTable     
+     Events:
+       GetTripsByCity:
+         Type: Api
+         Properties:
+           Path: /trips/{country}/city
+           Method: get
+           RequestParameters:
+            - method.request.querystring.city 
              
   GetTripsByPeriodFunction:
     Type: AWS::Serverless::Function
@@ -78,7 +78,7 @@ Resources:
        - DynamoDBCrudPolicy:
            TableName: !Ref TripTable     
      Events:
-       CreateTripRecord:
+       GetTripsByPeriod:
          Type: Api
          Properties:
            Path: /trips

@@ -27,11 +27,11 @@ Outputs:
       Fn::GetAtt:
       - GetTripsByCountryFunction
       - Arn
-  GetStudyRecordsByPeriodFunction:
-    Description: GetStudyRecordsByPeriod Lambda Function ARN
+  GetTripsRecordsByPeriodFunction:
+    Description: GetTripsRecordsByPeriod Lambda Function ARN
     Value:
       Fn::GetAtt:
-      - GetStudyRecordsByPeriodFunction
+      - GetTripsRecordsByPeriodFunction
       - Arn
 Resources:
   CreateTripRecordFunction:
@@ -43,7 +43,7 @@ Resources:
             Method: post
             Path: /trip
           Type: Api
-      Handler: br.com.iwe.handler.CreateStudyRecord::handleRequest
+      Handler: br.com.iwe.handler.CreateTripRecord::handleRequest
       Runtime: java8
     Type: AWS::Serverless::Function
   GetTripsByCityFunction:
@@ -52,7 +52,7 @@ Resources:
       Events:
         GetTripsByCity:
           Properties:
-           Path: /trips/{country}/findByCity
+           Path: /trips/{country}/city
            Method: get
            RequestParameters:
             - method.request.querystring.city
