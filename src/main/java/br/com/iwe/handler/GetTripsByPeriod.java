@@ -17,15 +17,14 @@ public class GetTripsByPeriod implements RequestHandler<HandlerRequest, HandlerR
 	@Override
 	public HandlerResponse handleRequest(HandlerRequest request, Context context) {
 
-		final String country = request.getPathParameters().get("country");
-		final String starts = request.getQueryStringParameters().get("starts");
-		final String ends = request.getQueryStringParameters().get("ends");
+		final String start = request.getQueryStringParameters().get("start");
+		final String end = request.getQueryStringParameters().get("end");
 
 		context.getLogger()
-				.log("Searching for registered trips for " + country + " starts  " + starts + " and ends" + ends);
+				.log("Searching for registered trips starts  " + start + " and ends " + end);
 
 		try {
-			final List<Trip> trips = this.repository.findByPeriod(country, starts, ends);
+			final List<Trip> trips = this.repository.findByPeriod(start, end);
 			if (trips == null || trips.isEmpty()) {
 				return HandlerResponse.builder().setStatusCode(404).build();
 			}

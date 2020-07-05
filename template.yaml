@@ -45,7 +45,7 @@ Resources:
        CreateTripRecord:
          Type: Api
          Properties:
-           Path: /trip/country/{country}/findByCity
+           Path: /trips/country/{country}/findByCity
            Method: get
            RequestParameters:
             - method.request.querystring.city
@@ -63,7 +63,7 @@ Resources:
        CreateTripRecord:
          Type: Api
          Properties:
-           Path: /trip/{country}
+           Path: /trips/{country}
            Method: get
            RequestParameters:
             - method.request.path.country 
@@ -81,11 +81,11 @@ Resources:
        CreateTripRecord:
          Type: Api
          Properties:
-           Path: /trip/{country}/findByPeriod
+           Path: /trips
            Method: get
            RequestParameters:
-            - method.request.querystring.starts
-            - method.request.querystring.ends
+            - method.request.querystring.start
+            - method.request.querystring.end
              
   TripTable:
     Type: AWS::DynamoDB::Table
@@ -96,14 +96,14 @@ Resources:
           AttributeType: S
         - AttributeName: city
           AttributeType: S
-        - AttributeName: date
+        - AttributeName: dateTrip
           AttributeType: S
         - AttributeName: reason
           AttributeType: S            
       KeySchema:
         - AttributeName: country
           KeyType: HASH
-        - AttributeName: date
+        - AttributeName: dateTrip
           KeyType: RANGE
       LocalSecondaryIndexes: 
         - IndexName: cityIndex

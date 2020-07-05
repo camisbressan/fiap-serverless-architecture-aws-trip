@@ -14,17 +14,17 @@ public class Trip {
 	@DynamoDBAttribute(attributeName = "city")
 	private String city;
 
-	@DynamoDBRangeKey(attributeName = "date")
-	private String date;
+	@DynamoDBRangeKey(attributeName = "dateTrip")
+	private String dateTrip;
 
 	@DynamoDBAttribute(attributeName = "reason")
 	private String reason;
 
-	public Trip(String country, String city, String date, String reason) {
+	public Trip(String country, String city, String dateTrip, String reason) {
 		super();
 		this.country = country;
 		this.city = city;
-		this.date = date;
+		this.dateTrip = dateTrip;
 		this.reason = reason;
 	}
 
@@ -48,12 +48,12 @@ public class Trip {
 		this.city = city;
 	}
 
-	public String getdate() {
-		return date;
+	public String getdateTrip() {
+		return dateTrip;
 	}
 
-	public void setdate(String date) {
-		this.date = date;
+	public void setdateTrip(String dateTrip) {
+		this.dateTrip = dateTrip;
 	}
 
 	public String getReason() {
