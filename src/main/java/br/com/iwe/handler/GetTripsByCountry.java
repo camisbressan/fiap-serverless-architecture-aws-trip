@@ -20,15 +20,17 @@ public class GetTripsByCountry implements RequestHandler<HandlerRequest, Handler
 		final String country = request.getPathParameters().get("country");
 
 		context.getLogger().log("Searching for registered trips for " + country);
-
-		final List<Trip> trips = this.repository.findByCountry(country);
-
-		if (trips == null || trips.isEmpty()) {
-			return HandlerResponse.builder().setStatusCode(404).build();
+		
+		try {
+			final List<Trip> trips = this.repository.findByCountry(country);
+			if (trips == null || trips.isEmpty()) {
+				return HandlerResponse.builder().setStatusCode(404).build();
+			}
+			return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
+		} catch (Exception e) {
+			return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error. " + e.getMessage())
+					.build();
 		}
-
-		return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
-
 	}
 
 }

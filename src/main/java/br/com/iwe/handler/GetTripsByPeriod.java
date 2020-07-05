@@ -24,13 +24,16 @@ public class GetTripsByPeriod implements RequestHandler<HandlerRequest, HandlerR
 		context.getLogger()
 				.log("Searching for registered trips for " + country + " starts  " + starts + " and ends" + ends);
 
-		final List<Trip> trips = this.repository.findByPeriod(country, starts, ends);
-
-		if (trips == null || trips.isEmpty()) {
-			return HandlerResponse.builder().setStatusCode(404).build();
+		try {
+			final List<Trip> trips = this.repository.findByPeriod(country, starts, ends);
+			if (trips == null || trips.isEmpty()) {
+				return HandlerResponse.builder().setStatusCode(404).build();
+			}
+			return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
+		} catch (Exception e) {
+			return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error. " + e.getMessage())
+					.build();
 		}
-		return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
-
 	}
 
 }

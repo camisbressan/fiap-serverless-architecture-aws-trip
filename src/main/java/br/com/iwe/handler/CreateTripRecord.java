@@ -23,14 +23,14 @@ public class CreateTripRecord implements RequestHandler<HandlerRequest, HandlerR
 			trip = new ObjectMapper().readValue(request.getBody(), Trip.class);
 		} catch (IOException e) {
 			return HandlerResponse.builder().setStatusCode(400)
-					.setRawBody("There is a error in your Trip! >>" + e.getMessage()).build();
+					.setRawBody("There is a error in your Trip! " + e.getMessage()).build();
 		}
 		try {
 			context.getLogger().log("Creating a new trip record for the city " + trip.getCity());
 			final Trip tripRecorded = repository.save(trip);
 			return HandlerResponse.builder().setStatusCode(201).setObjectBody(tripRecorded).build();
 		} catch (Exception e) {
-			return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error! >>" + e.getMessage())
+			return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error. " + e.getMessage())
 					.build();
 		}
 	}

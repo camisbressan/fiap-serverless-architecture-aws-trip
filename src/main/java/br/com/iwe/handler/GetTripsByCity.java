@@ -18,17 +18,19 @@ public class GetTripsByCity implements RequestHandler<HandlerRequest, HandlerRes
 	public HandlerResponse handleRequest(HandlerRequest request, Context context) {
 
 		final String country = request.getPathParameters().get("country");
-		final String city = request.getPathParameters().get("city");
+		final String city = request.getQueryStringParameters().get("city");
 
-		context.getLogger().log("Searching for registered trips for " + country + " and " + city);
+		context.getLogger().log("Searching for registered trips for " + country + " and city equals" + city);
 
-		final List<Trip> trips = this.repository.findByCity(city, country);
-
-		if (trips == null || trips.isEmpty()) {
-			return HandlerResponse.builder().setStatusCode(404).build();
+		try {
+			final List<Trip> trips = this.repository.findByCity(city, country);
+			if (trips == null || trips.isEmpty()) {
+				return HandlerResponse.builder().setStatusCode(404).build();
+			}
+			return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
+		} catch (Exception e) {
+			return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error. " + e.getMessage()).build();
 		}
-
-		return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
 
 	}
 
