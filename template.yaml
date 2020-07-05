@@ -1,9 +1,9 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-    study-datalake
+    fiap-trip
 
-    Rest API to manage a Data Lake of study links
+    Rest API to manage a Data Lake of trip links
 
 Globals:
     Function:
@@ -11,134 +11,135 @@ Globals:
         MemorySize: 512
         Environment:
           Variables:
-            TABLE_NAME: !Ref StudyTable
+            TABLE_NAME: !Ref TripTable
             ENDPOINT_OVERRIDE: ""
 
 Resources:
 
-  CreateStudyRecordFunction:
+  CreateTripRecordFunction:
     Type: AWS::Serverless::Function
     Properties:
-     CodeUri: target/study-datalake-1.0.0-SNAPSHOT-jar-with-dependencies.jar
-     Handler: br.com.iwe.handler.CreateStudyRecord::handleRequest
+     CodeUri: target/fiap-serverless-architecture-aws-trip-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.iwe.handler.CreateTripRecord::handleRequest
      Runtime: java8
      Policies:
        - DynamoDBCrudPolicy:
-           TableName: !Ref StudyTable     
+           TableName: !Ref TripTable     
      Events:
        CreateStudyRecord:
          Type: Api
          Properties:
-           Path: /study
+           Path: /trip
            Method: post
            
-  GetStudyRecordsByPeriodFunction:
+  GetTripsByCityFunction:
     Type: AWS::Serverless::Function
     Properties:
-     CodeUri: target/study-datalake-1.0.0-SNAPSHOT-jar-with-dependencies.jar
-     Handler: br.com.iwe.handler.GetStudyRecordsByPeriod::handleRequest
+     CodeUri: ./target/fiap-serverless-architecture-aws-trip-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.rws.handler.GetTripsByCity::handleRequest
      Runtime: java8
      Policies:
        - DynamoDBCrudPolicy:
-           TableName: !Ref StudyTable     
+           TableName: !Ref TripTable     
      Events:
-       GetStudyRecordsByPeriod:
+       CreateTripRecord:
          Type: Api
          Properties:
-           Path: /study/{topic}/findByPeriod
+           Path: /trip/{country}/{city}
            Method: get
            RequestParameters:
-              - method.request.querystring.starts
-              - method.request.querystring.ends
+            - method.request.querystring.country
+            - method.request.querystring.city
+            
+  GetTripsByCountryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+     CodeUri: ./target/fiap-serverless-architecture-aws-trip-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.rws.handler.GetTripsByCountry::handleRequest
+     Runtime: java8
+     Policies:
+       - DynamoDBCrudPolicy:
+           TableName: !Ref TripTable     
+     Events:
+       CreateTripRecord:
+         Type: Api
+         Properties:
+           Path: /trip/country/{country}
+           Method: get
+           RequestParameters:
+            - method.request.querystring.country 
+             
+  GetTripsByPeriodFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+     CodeUri: ./target/fiap-serverless-architecture-aws-trip-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.rws.handler.GetTripsByPeriod::handleRequest
+     Runtime: java8
+     Policies:
+       - DynamoDBCrudPolicy:
+           TableName: !Ref TripTable     
+     Events:
+       CreateTripRecord:
+         Type: Api
+         Properties:
+           Path: /trip/{country}/findByPeriod
+           Method: get
+           RequestParameters:
+            - method.request.querystring.starts
+            - method.request.querystring.ends
               
-  GetStudyRecordsByTagFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-     CodeUri: target/study-datalake-1.0.0-SNAPSHOT-jar-with-dependencies.jar
-     Handler: br.com.iwe.handler.GetStudyRecordsByTag::handleRequest
-     Runtime: java8
-     Policies:
-       - DynamoDBCrudPolicy:
-           TableName: !Ref StudyTable     
-     Events:
-       GetStudyRecordsByTag:
-         Type: Api
-         Properties:
-           Path: /study/{topic}/findByTag
-           Method: get
-           RequestParameters:
-              - method.request.querystring.tag
-
-  GetStudyRecordsByIsConsumedFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-     CodeUri: target/study-datalake-1.0.0-SNAPSHOT-jar-with-dependencies.jar
-     Handler: br.com.iwe.handler.GetStudyRecordsByIsConsumed::handleRequest
-     Runtime: java8
-     Policies:
-       - DynamoDBCrudPolicy:
-           TableName: !Ref StudyTable
-     Events:
-       GetStudyRecordsByIsConsumed:
-         Type: Api
-         Properties:
-           Path: /study/{topic}/findByIsConsumed
-           Method: get
-           RequestParameters:
-              - method.request.querystring.isconsumed
-              
-  StudyTable:
+ TripTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: study
+      TableName: trip
       AttributeDefinitions:
-        - AttributeName: topic
+        - AttributeName: country
           AttributeType: S
-        - AttributeName: dateTimeCreation
+        - AttributeName: city
           AttributeType: S
-        - AttributeName: tag
+        - AttributeName: date
           AttributeType: S
-        - AttributeName: consumed
+        - AttributeName: reason
           AttributeType: S            
       KeySchema:
-        - AttributeName: topic
+        - AttributeName: country
           KeyType: HASH
-        - AttributeName: dateTimeCreation
+        - AttributeName: date
           KeyType: RANGE
       LocalSecondaryIndexes: 
         - IndexName: tagIndex
           KeySchema: 
-            - AttributeName: topic
+            - AttributeName: country
               KeyType: HASH
-            - AttributeName: tag
+            - AttributeName: city
               KeyType: RANGE
           Projection:
              ProjectionType: ALL 
         - IndexName: consumedIndex
           KeySchema: 
-            - AttributeName: topic
+            - AttributeName: country
               KeyType: HASH
-            - AttributeName: consumed
+            - AttributeName: reason
               KeyType: RANGE
           Projection:
              ProjectionType: ALL      
-      BillingMode: PAY_PER_REQUEST              
+      BillingMode: PAY_PER_REQUEST                   
 
 Outputs:
 
-    CreateStudyRecordFunction:
-      Description: "CreateStudyRecord Lambda Function ARN"
-      Value: !GetAtt CreateStudyRecordFunction.Arn
+    CreateTripRecordFunction:
+      Description: "CreateTripRecord Lambda Function ARN"
+      Value: !GetAtt CreateTripRecordFunction.Arn
+
+    GetTripsByCityFunction:
+      Description: "GetTripsByPeriod Lambda Function ARN"
+      Value: !GetAtt GetTripsByCityFunction.Arn   
       
+    GetTripsByCountryFunction:
+      Description: "GetTripsByPeriod Lambda Function ARN"
+      Value: !GetAtt GetTripsByCountryFunction.Arn         
+
     GetStudyRecordsByPeriodFunction:
-      Description: "GetStudyRecordsByPeriod Lambda Function ARN"
-      Value: !GetAtt GetStudyRecordsByPeriodFunction.Arn
-      
-    GetStudyRecordsByTagFunction:
-      Description: "GetStudyRecordsByTag Lambda Function ARN"
-      Value: !GetAtt GetStudyRecordsByTagFunction.Arn
-      
-    GetStudyRecordsByIsConsumedFunction:
-      Description: "GetStudyRecordsByIsConsumed Lambda Function ARN"
-      Value: !GetAtt GetStudyRecordsByIsConsumedFunction.Arn      
+      Description: "GetTripsByPeriod Lambda Function ARN"
+      Value: !GetAtt GetTripsByPeriodFunction.Arn    
      
