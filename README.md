@@ -48,9 +48,9 @@ Ele deve retornar 404. Agora você pode explorar todos os endpoints, usando o ar
 
 Print da chamada de criação da trip no Postman.
 
-![Postman](docs/Postman.jpeg)
+![Postman](docs/Postman.jpg)
 
 Print das chamadas do Postman no console.
 
-![Console](docs/Console.jpeg)
+![Console](docs/Console.jpg)
 
