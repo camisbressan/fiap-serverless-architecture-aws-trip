@@ -1,9 +1,0 @@
-/Users/camilabressansilva/eclipse-workspace/study-datalake/src/main/java/br/com/iwe/model/HandlerResponse.java
-/Users/camilabressansilva/eclipse-workspace/study-datalake/src/main/java/br/com/iwe/dao/DynamoDBManager.java
-/Users/camilabressansilva/eclipse-workspace/study-datalake/src/main/java/br/com/iwe/handler/GetStudyRecordsByIsConsumed.java
-/Users/camilabressansilva/eclipse-workspace/study-datalake/src/main/java/br/com/iwe/handler/CreateStudyRecord.java
-/Users/camilabressansilva/eclipse-workspace/study-datalake/src/main/java/br/com/iwe/dao/StudyRepository.java
-/Users/camilabressansilva/eclipse-workspace/study-datalake/src/main/java/br/com/iwe/handler/GetStudyRecordsByTag.java
-/Users/camilabressansilva/eclipse-workspace/study-datalake/src/main/java/br/com/iwe/model/Study.java
-/Users/camilabressansilva/eclipse-workspace/study-datalake/src/main/java/br/com/iwe/handler/GetStudyRecordsByPeriod.java
-/Users/camilabressansilva/eclipse-workspace/study-datalake/src/main/java/br/com/iwe/model/HandlerRequest.java

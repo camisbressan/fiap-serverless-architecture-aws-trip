@@ -1,18 +1,18 @@
 {
-	"CreateStudyRecordFunction": {
+	"CreateTripRecordFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.windows.localhost:8000",
-		"TABLE_NAME": "study"
+		"TABLE_NAME": "trip"
 	},
-	"GetStudyRecordsByPeriodFunction": {
+	"GetTripsRecordsByCityFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.windows.localhost:8000",
-		"TABLE_NAME": "study"
+		"TABLE_NAME": "trip"
 	},
-	"GetStudyRecordsByTagFunction": {
+	"GetTripsRecordsByCountryFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.windows.localhost:8000",
-		"TABLE_NAME": "study"
+		"TABLE_NAME": "trip"
 	},
-	"GetStudyRecordsByIsConsumedFunction": {
+	"GetTripsRecordsByPeriodFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.windows.localhost:8000",
-		"TABLE_NAME": "study"
+		"TABLE_NAME": "trip"
 	}
 }
