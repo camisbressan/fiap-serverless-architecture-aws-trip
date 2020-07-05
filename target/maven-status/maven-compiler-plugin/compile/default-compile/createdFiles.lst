@@ -1,0 +1,10 @@
+br/com/iwe/dao/StudyRepository.class
+br/com/iwe/dao/DynamoDBManager.class
+br/com/iwe/model/HandlerResponse$Builder.class
+br/com/iwe/model/HandlerRequest.class
+br/com/iwe/model/HandlerResponse.class
+br/com/iwe/handler/GetStudyRecordsByTag.class
+br/com/iwe/model/Study.class
+br/com/iwe/handler/CreateStudyRecord.class
+br/com/iwe/handler/GetStudyRecordsByPeriod.class
+br/com/iwe/handler/GetStudyRecordsByIsConsumed.class
