@@ -20,10 +20,10 @@ public class GetTripsByCity implements RequestHandler<HandlerRequest, HandlerRes
 		final String country = request.getPathParameters().get("country");
 		final String city = request.getQueryStringParameters().get("city");
 
-		context.getLogger().log("Searching for registered trips for " + country + " and city equals" + city);
+		context.getLogger().log("Searching for registered trips for " + country + " and city equals " + city);
 
 		try {
-			final List<Trip> trips = this.repository.findByCity(city, country);
+			final List<Trip> trips = this.repository.findByCity(country, city);
 			if (trips == null || trips.isEmpty()) {
 				return HandlerResponse.builder().setStatusCode(404).build();
 			}

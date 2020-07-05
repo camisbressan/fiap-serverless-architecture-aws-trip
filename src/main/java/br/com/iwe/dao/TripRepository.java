@@ -26,16 +26,15 @@ public class TripRepository {
 		eav.put(":val2", new AttributeValue().withS(end));
 
 		final DynamoDBQueryExpression<Trip> queryExpression = new DynamoDBQueryExpression<Trip>()
-				.withKeyConditionExpression("date between :val1 and :val2")
+				.withKeyConditionExpression("dateTrip between :val1 and :val2")
 				.withExpressionAttributeValues(eav);
 
-		final List<Trip> studies = mapper.query(Trip.class, queryExpression);
+		final List<Trip> trips = mapper.query(Trip.class, queryExpression);
 
-		return studies;
+		return trips;
 	}
 
 	public List<Trip> findByCity(final String country, final String city) {
-		System.out.println(country + " " + city);
 
 		final Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
 		eav.put(":val1", new AttributeValue().withS(country));
