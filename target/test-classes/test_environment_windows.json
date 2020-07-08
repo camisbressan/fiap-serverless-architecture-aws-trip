@@ -3,15 +3,15 @@
 		"ENDPOINT_OVERRIDE": "http://docker.for.windows.localhost:8000",
 		"TABLE_NAME": "trip"
 	},
-	"GetTripsRecordsByCityFunction": {
+	"GetTripsByCityFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.windows.localhost:8000",
 		"TABLE_NAME": "trip"
 	},
-	"GetTripsRecordsByCountryFunction": {
+	"GetTripsByCountryFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.windows.localhost:8000",
 		"TABLE_NAME": "trip"
 	},
-	"GetTripsRecordsByPeriodFunction": {
+	"GetTripsByPeriodFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.windows.localhost:8000",
 		"TABLE_NAME": "trip"
 	}

@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"country\": \"Brasil\",\n    \"city\": \"Barueri\",\n    \"reason\": \"Teste da aula\",\n    \"dateTrip\": \"2020-07-05T15:11:45Z\"\n}"
+					"raw": "{\n    \"country\": \"Brasil\",\n    \"city\": \"Guarulhos\",\n    \"reason\": \"Teste da aula\",\n    \"dateTrip\": \"2020-07-05T15:11:45Z\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/trip",
@@ -41,7 +41,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/trips/Brasil/city?city=Guarlhos",
+					"raw": "http://localhost:3000/trips/Brasil/?city=Garulhos",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -50,12 +50,12 @@
 					"path": [
 						"trips",
 						"Brasil",
-						"city"
+						""
 					],
 					"query": [
 						{
 							"key": "city",
-							"value": "Guarlhos"
+							"value": "Garulhos"
 						}
 					]
 				}
