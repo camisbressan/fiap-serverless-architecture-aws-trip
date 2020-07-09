@@ -22,6 +22,11 @@ Usaremos `maven` para instalar nossas dependências e colocar nossa aplicação 
 mvn clean install -X -U
 ```
 
+Após o término da instalação das dependencias, aguarde gerar a versão compilada da aplicação :
+
+![Postman](docs/mvn_install.png)
+
+
 ### Desenvolvimento Local
 
 **Chamando nossa função localmente através do API Gateway**
@@ -51,10 +56,49 @@ Ele deve retornar 404. Agora você pode explorar todos os endpoints, usando o ar
 
 ** SAM CLI ** é usado para emular o Lambda e o API Gateway localmente e usa nosso `template.yaml` para entender como inicializar esse ambiente (tempo de execução, onde está o código fonte etc.)
 
-## Prints
 
-Print da chamada de criação da trip no Postman.
+## Empacotamento e implantação
 
-![Postman](docs/Postman.jpg)
+O tempo de execução do AWS Lambda Java aceita um arquivo zip ou um arquivo JAR independente - usamos o último neste exemplo. O SAM usará a CodeUripropriedade para saber onde procurar aplicativos e dependências:
+
+Em primeiro lugar, precisamos de um local S3 bucketonde possamos fazer upload de nossas funções Lambda empacotadas como ZIP antes de implantarmos qualquer coisa - se você não tiver um bucket S3 para armazenar artefatos de código, é um bom momento para criar um:
+
+```
+export BUCKET_NAME=fiap-serverless-trip
+aws s3 mb s3://$BUCKET_NAME
+```
+
+Em seguida, execute o seguinte comando para empacotar nossa função Lambda para S3:
+
+```
+sam package \
+    --template-file template.yaml \
+    --output-template-file packaged.yaml \
+    --s3-bucket $BUCKET_NAME
+
+```
+
+Em seguida, o comando a seguir criará uma Cloudformation Stack e implantará seus recursos SAM.
+
+```
+sam deploy \
+    --template-file packaged.yaml \
+    --stack-name fiap-serverless-trip \
+    --capabilities CAPABILITY_IAM
+
+```
+
+![Postman](docs/deploy.jpeg)
+
+
+Após a conclusão da implantação, você pode executar o seguinte comando para recuperar a URL do Terminal API Gateway:
+
+```
+aws cloudformation describe-stacks \
+    --stack-name fiap-serverless-trip \
+    --query 'Stacks[].Outputs'
+
+```
+![Postman](docs/end_points_aws.jpeg)
 
 
