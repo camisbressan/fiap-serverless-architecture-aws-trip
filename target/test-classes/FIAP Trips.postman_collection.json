@@ -41,7 +41,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/trips/Brasil/?city=Garulhos",
+					"raw": "http://localhost:3000/trips/Brasil/?city=Guarulhos",
 					"protocol": "http",
 					"host": [
 						"localhost"
