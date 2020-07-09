@@ -111,6 +111,14 @@ Resources:
             - AttributeName: city
               KeyType: RANGE
           Projection:
+             ProjectionType: ALL               
+        - IndexName: reasonIndex
+          KeySchema: 
+            - AttributeName: country
+              KeyType: HASH
+            - AttributeName: reason
+              KeyType: RANGE              
+          Projection:
              ProjectionType: ALL    
       BillingMode: PAY_PER_REQUEST
       
