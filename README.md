@@ -91,7 +91,7 @@ sam deploy \
 ![Postman](docs/deploy.jpeg)
 
 
-Após a conclusão da implantação, você pode executar o seguinte comando para recuperar a URL do Terminal API Gateway e listar os endpoints:
+Após a conclusão da implantação, você pode executar o seguinte comando para recuperar a URL do Terminal API Gateway:
 
 ```
 aws cloudformation describe-stacks \
@@ -100,6 +100,23 @@ aws cloudformation describe-stacks \
 
 ```
 
+O comando acima resultará na listagem dos endpoints da aplicação :
+
 ![Postman](docs/end_points_aws.jpeg)
 
 
+----
+
+## Demonstração das funcionalidades Postman
+
+- Recuperação de viagens por cidade
+![Postman](docs/findByCity.png)
+
+- Recuperação de viagens por país
+![Postman](docs/findByCountry.png)
+
+- Recuperação de viagens por período
+![Postman](docs/findByPeriod.png)
+
+- Criação de novo registro de viagem
+![Postman](docs/createTripRecord.png)
