@@ -115,24 +115,24 @@ O comando acima resultará na listagem dos endpoints da aplicação :
 
 ## Demonstração das funcionalidades Postman
 
-- Recuperação de viagens por cidade
+- Recuperação de viagens por cidade:
 
 ![Postman](docs/findByCity.png)
 
 
 
-- Recuperação de viagens por país
+- Recuperação de viagens por país:
 
 ![Postman](docs/findByCountry.png)
 
 
 
-- Recuperação de viagens por período
+- Recuperação de viagens por período:
 
 ![Postman](docs/findByPeriod.png)
 
 
 
-- Criação de novo registro de viagem
+- Criação de novo registro de viagem:
 
 ![Postman](docs/createTripRecord.png)
