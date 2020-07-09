@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "31e3f0d7-caea-44ea-8b94-09c9d2901957",
+		"_postman_id": "dd489992-325b-46c5-956e-9c7c91aaf693",
 		"name": "FIAP Trips",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -41,7 +41,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/trips/Brasil/?city=Guarulhos",
+					"raw": "http://localhost:3000/trips/Brasil/?city=Garulhos",
 					"protocol": "http",
 					"host": [
 						"localhost"

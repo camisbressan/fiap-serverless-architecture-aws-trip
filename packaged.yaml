@@ -18,7 +18,7 @@ Resources:
   CreateTripRecordFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://fiap-aws-trip/ff5f1d58de9ecdbc6f021abec449fe30
+      CodeUri: s3://fiap-serverless-aws-trip/b9d673b6fac0a137c74da4c51b93913c
       Handler: br.com.iwe.handler.CreateTripRecord::handleRequest
       Runtime: java8
       Policies:
@@ -34,7 +34,7 @@ Resources:
   GetTripsByCountryFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://fiap-aws-trip/ff5f1d58de9ecdbc6f021abec449fe30
+      CodeUri: s3://fiap-serverless-aws-trip/b9d673b6fac0a137c74da4c51b93913c
       Handler: br.com.iwe.handler.GetTripsByCountry::handleRequest
       Runtime: java8
       Policies:
@@ -45,12 +45,12 @@ Resources:
         GetTripsByCountry:
           Type: Api
           Properties:
-            Path: /trips/{country}
+            Path: /trips/country/{country}
             Method: get
   GetTripsByCityFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://fiap-aws-trip/ff5f1d58de9ecdbc6f021abec449fe30
+      CodeUri: s3://fiap-serverless-aws-trip/b9d673b6fac0a137c74da4c51b93913c
       Handler: br.com.iwe.handler.GetTripsByCity::handleRequest
       Runtime: java8
       Policies:
@@ -61,14 +61,14 @@ Resources:
         GetTripsByCity:
           Type: Api
           Properties:
-            Path: /trips/{country}/
+            Path: /trips/{country}
             Method: get
             RequestParameters:
             - method.request.querystring.city
   GetTripsByPeriodFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://fiap-aws-trip/ff5f1d58de9ecdbc6f021abec449fe30
+      CodeUri: s3://fiap-serverless-aws-trip/b9d673b6fac0a137c74da4c51b93913c
       Handler: br.com.iwe.handler.GetTripsByPeriod::handleRequest
       Runtime: java8
       Policies:
@@ -79,7 +79,7 @@ Resources:
         GetTripsByPeriod:
           Type: Api
           Properties:
-            Path: /trips
+            Path: /trips/{country}/period
             Method: get
             RequestParameters:
             - method.request.querystring.start

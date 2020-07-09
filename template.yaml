@@ -45,7 +45,7 @@ Resources:
        GetTripsByCountry:
          Type: Api
          Properties:
-           Path: /trips/{country}
+           Path: /trips/country/{country}
            Method: get
                        
   GetTripsByCityFunction:
@@ -61,7 +61,7 @@ Resources:
        GetTripsByCity:
          Type: Api
          Properties:
-           Path: /trips/{country}/
+           Path: /trips/{country}
            Method: get
            RequestParameters:
             - method.request.querystring.city 
@@ -79,7 +79,7 @@ Resources:
        GetTripsByPeriod:
          Type: Api
          Properties:
-           Path: /trips
+           Path: /trips/{country}/period
            Method: get
            RequestParameters:
             - method.request.querystring.start
