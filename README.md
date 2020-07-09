@@ -57,7 +57,4 @@ Print da chamada de criação da trip no Postman.
 
 ![Postman](docs/Postman.jpg)
 
-Print das chamadas do Postman no console.
-
-![Console](docs/Console.jpg)
 
