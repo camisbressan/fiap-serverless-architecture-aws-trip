@@ -29,7 +29,7 @@ mvn clean install -X -U
 Caso precise dar permissão o comando linux é:
 
 ```bash 
-sudo chown -R jaqueline local/ 
+sudo chown -R <seu_usuario> local/ 
 ```
 
 1. Iniciar o DynamoDB Local em um Docker container. `docker run -p 8000:8000 -v $(pwd)/local/dynamodb:/data/ amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -dbPath /data`
